@@ -1,6 +1,6 @@
 // The configured URL may include a service path like `/rest/v1/`; Supabase clients need the bare project origin.
 export function getSupabaseUrl() {
-  const raw = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const raw = 'https://kxtrlwlvaonswwpguhmb.supabase.co'
   if (!raw) return ''
   try {
     return new URL(raw).origin
