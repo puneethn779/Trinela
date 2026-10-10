@@ -1,6 +1,6 @@
 'use client'
 
-import dynamic from 'next/dynamic'
+import nextDynamic from 'next/dynamic'
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
 import useSWR from 'swr'
 import { createClient as createSupabaseClient } from '@/lib/supabase/client'
@@ -45,11 +45,11 @@ import { toast } from 'sonner'
 import type { SchoolMapFocus } from '@/components/school-map'
 
 const supabase = createSupabaseClient()
-const SchoolMap = dynamic(() => import('@/components/school-map'), {
+const SchoolMap = nextDynamic(() => import('@/components/school-map'), {
   ssr: false,
   loading: () => <div className="school-map-loading" role="status">Loading school map…</div>,
 })
-
+export const dynamic = 'force-dynamic';
 type School = {
   id: string | number
   name: string
