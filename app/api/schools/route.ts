@@ -19,7 +19,7 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(request: NextRequest) {
   const supabaseUrl = getSupabaseUrl()
-  const apiKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+  const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt4dHJsd2x2YW9uc3d3cGd1aG1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0NTU5NzUsImV4cCI6MjEwNzAzMTk3NX0.IvFEchXhfvAk65vDyoRlZ-OqDQ4N60he9m2nUPZqDgI',
   if (!supabaseUrl || !apiKey) {
     return NextResponse.json({ error: 'School listings are not configured.' }, { status: 503 })
   }
