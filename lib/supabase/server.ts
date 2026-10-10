@@ -1,0 +1,37 @@
+import { createServerClient } from '@supabase/ssr'
+import { cookies } from 'next/headers'
+import { getSupabaseUrl } from './url'
+
+/**
+ * Especially important if using Fluid compute: Don't put this client in a
+ * global variable. Always create a new client within each function when using
+ * it.
+ */
+export async function createClient() {
+  const cookieStore = await cookies()
+
+  return createServerClient(
+    getSupabaseUrl(),
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    {
+      // Secure cookies in production; not in dev, so localhost still works.
+      cookieOptions: { secure: process.env.NODE_ENV === 'production' },
+      cookies: {
+        getAll() {
+          return cookieStore.getAll()
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options),
+            )
+          } catch {
+            // The "setAll" method was called from a Server Component.
+            // This can be ignored if you have proxy refreshing
+            // user sessions.
+          }
+        },
+      },
+    },
+  )
+}
