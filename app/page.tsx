@@ -49,7 +49,7 @@ const SchoolMap = nextDynamic(() => import('@/components/school-map'), {
   ssr: false,
   loading: () => <div className="school-map-loading" role="status">Loading school map…</div>,
 })
-export const dynamic = 'force-dynamic';
+
 type School = {
   id: string | number
   name: string
